@@ -4,7 +4,7 @@ import { AtmosphericBackground } from "@/components/AtmosphericBackground";
 import { ContactLinks } from "@/components/ContactLinks";
 import { SectionHeading } from "@/components/SectionHeading";
 import { WorkCard } from "@/components/WorkCard";
-import { heroCategories } from "@/lib/constants";
+import { heroCategoryLinks } from "@/lib/constants";
 import { getFeaturedWorks } from "@/data/works";
 import { site } from "@/lib/design";
 
@@ -23,10 +23,10 @@ export default function HomePage() {
             {site.tagline}
           </p>
           <ul className="font-ui mt-12 flex flex-wrap gap-x-5 gap-y-3 text-sm tracking-[0.14em] sm:mt-14 sm:gap-x-6">
-            {heroCategories.map((cat) => (
-              <li key={cat.slug}>
+            {heroCategoryLinks.map((cat) => (
+              <li key={cat.href}>
                 <Link
-                  href={`/works?category=${cat.slug}`}
+                  href={cat.href}
                   className="motion-safe-transition inline-flex items-center gap-1 text-text-muted transition-colors duration-300 hover:text-text-primary"
                 >
                   {cat.label}

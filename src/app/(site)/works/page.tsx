@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { CategoryNav } from "@/components/CategoryNav";
 import { SectionHeading } from "@/components/SectionHeading";
 import { WorkCard } from "@/components/WorkCard";
@@ -15,6 +16,11 @@ interface WorksPageProps {
 export default async function WorksPage({ searchParams }: WorksPageProps) {
   const params = await searchParams;
   const category = params.category ?? null;
+
+  if (category === "art") {
+    redirect("/art");
+  }
+
   const filteredWorks = getWorksByCategory(category);
 
   return (

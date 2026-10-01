@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 const cardLinks = [
   { href: "/", label: "Portfolio" },
   { href: "/works", label: "Works" },
+  { href: "/art", label: "Art" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
