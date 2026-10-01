@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-red-primary: #75020f;
+  --color-red-deep: #51080d;
+  --color-red-darker: #2b0307;
+  --color-red-bright: #8e0d18;
+  --color-red-accent: #a81e2a;
+  --color-black-base: #0b0b0d;
+  --color-black-soft: #111111;
+  --color-black-muted: #17171b;
+  --color-text-primary: #f5efea;
+  --color-text-secondary: #e9ded8;
+  --color-text-muted: #cfc2bc;
+  --font-display: var(--font-cormorant);
+  --font-japanese: var(--font-shippori);
+  --font-ui: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-black-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-japanese), serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display), serif;
+}
+
+.font-ui {
+  font-family: var(--font-ui), sans-serif;
+}
+
+.font-japanese {
+  font-family: var(--font-japanese), serif;
+}
+
+.page-enter {
+  animation: page-enter 0.6s ease forwards;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .page-enter {
+    animation: none;
+  }
+
+  .motion-safe-transition {
+    transition: none !important;
+  }
+}
