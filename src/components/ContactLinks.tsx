@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { socialLinks } from "@/lib/constants";
 
 interface ContactLinksProps {
@@ -6,8 +7,11 @@ interface ContactLinksProps {
 }
 
 export function ContactLinks({ layout = "stack", variant = "full" }: ContactLinksProps) {
-  const allItems = [
-    { label: "Email", href: socialLinks.email },
+  const allItems: Array<
+    | { label: string; href: string; external: true }
+    | { label: string; href: string; external: false }
+  > = [
+    { label: "Email", href: "/email", external: false },
     { label: "GitHub", href: socialLinks.github, external: true },
     { label: "Instagram", href: socialLinks.instagram, external: true },
   ];
@@ -26,16 +30,23 @@ export function ContactLinks({ layout = "stack", variant = "full" }: ContactLink
     >
       {items.map((item) => (
         <li key={item.label}>
-          <a
-            href={item.href}
-            className="motion-safe-transition text-text-secondary transition-colors duration-300 hover:text-text-primary"
-            {...(item.external
-              ? { target: "_blank", rel: "noopener noreferrer" }
-              : {})}
-          >
-            {item.label}
-            {item.external ? " ↗" : ""}
-          </a>
+          {item.external ? (
+            <a
+              href={item.href}
+              className="motion-safe-transition text-text-secondary transition-colors duration-300 hover:text-text-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {item.label} ↗
+            </a>
+          ) : (
+            <Link
+              href={item.href}
+              className="motion-safe-transition text-text-secondary transition-colors duration-300 hover:text-text-primary"
+            >
+              {item.label}
+            </Link>
+          )}
         </li>
       ))}
     </ul>

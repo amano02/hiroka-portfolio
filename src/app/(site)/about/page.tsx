@@ -1,30 +1,12 @@
 import type { Metadata } from "next";
 import { ArrowLink } from "@/components/ArrowLink";
 import { SectionHeading } from "@/components/SectionHeading";
+import { aboutKeywords, aboutTimeline } from "@/data/about";
 import { site } from "@/lib/design";
 
 export const metadata: Metadata = {
   title: "ABOUT",
 };
-
-const currently = [
-  "Webサイト制作 / 運用",
-  "SNS運用 / 動画制作",
-  "Webアプリ / DX",
-  "AIを使った制作・実験",
-  "3D / Art",
-];
-
-const interests = [
-  "Web",
-  "Technology",
-  "AI",
-  "Art",
-  "Design",
-  "Culture",
-  "People",
-  "Ideas",
-];
 
 export default function AboutPage() {
   return (
@@ -32,30 +14,29 @@ export default function AboutPage() {
       <div className="mx-auto max-w-4xl">
         <SectionHeading title="ABOUT" as="h1" className="mb-12" />
         <p className="font-display text-3xl text-text-primary sm:text-4xl">{site.name}</p>
-        <p className="font-ui mt-4 text-sm tracking-[0.18em] text-text-muted">
-          Web / DX / SNS / Art / 3D / AI
+        <p className="font-ui mt-4 whitespace-pre-line text-sm tracking-[0.18em] text-text-muted">
+          {site.tagline}
         </p>
 
-        <div className="mt-12 space-y-6 text-base leading-relaxed text-text-secondary sm:text-lg">
-          <p>興味を持ったことを、実際につくりながら学んでいます。</p>
-          <p>
-            現在はWeb制作、SNS運用、アプリ開発、AI活用などを中心に、仕事・学習・創作を横断しながら活動しています。
-          </p>
-        </div>
-
         <section className="mt-16 border-t border-black-muted/70 pt-12">
-          <h2 className="font-ui text-xs tracking-[0.24em] text-text-muted">CURRENTLY</h2>
-          <ul className="mt-6 space-y-3 text-text-secondary">
-            {currently.map((item) => (
-              <li key={item}>{item}</li>
+          <h2 className="font-ui text-xs tracking-[0.24em] text-text-muted">TIMELINE</h2>
+          <ul className="mt-8 space-y-8">
+            {aboutTimeline.map((entry) => (
+              <li
+                key={entry.period}
+                className="grid gap-2 border-b border-black-muted/40 pb-8 last:border-b-0 last:pb-0 sm:grid-cols-[5.5rem_1fr] sm:gap-x-8"
+              >
+                <p className="font-ui text-xs tracking-[0.2em] text-text-muted">{entry.period}</p>
+                <p className="text-base leading-relaxed text-text-secondary">{entry.text}</p>
+              </li>
             ))}
           </ul>
         </section>
 
         <section className="mt-14 border-t border-black-muted/70 pt-12">
-          <h2 className="font-ui text-xs tracking-[0.24em] text-text-muted">INTERESTS</h2>
+          <h2 className="font-ui text-xs tracking-[0.24em] text-text-muted">KEYWORDS</h2>
           <ul className="font-ui mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm tracking-[0.12em] text-text-secondary">
-            {interests.map((item) => (
+            {aboutKeywords.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>

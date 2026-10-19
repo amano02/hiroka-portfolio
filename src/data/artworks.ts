@@ -58,6 +58,14 @@ export const artworks: Artwork[] = [
     tags: ["graphic", "photography", "visual-design"],
     active: true,
   },
+  {
+    slug: "illustration-characters",
+    title: "Character Illustration",
+    mediaType: "image",
+    media: "/art/illustration-characters.jpg",
+    tags: ["illustration"],
+    active: true,
+  },
 ];
 
 export function getArtworks(): Artwork[] {

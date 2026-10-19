@@ -15,6 +15,7 @@ const cardLinks = [
   { href: "/art", label: "Art" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
+  { href: "/email", label: "Email" },
 ];
 
 export default function CardPage() {
