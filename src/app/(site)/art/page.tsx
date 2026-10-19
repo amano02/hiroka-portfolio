@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { ArtTagNav } from "@/components/ArtTagNav";
 import { ArtworkCard } from "@/components/ArtworkCard";
+import { CollectionSortNav } from "@/components/CollectionSortNav";
 import { SectionHeading } from "@/components/SectionHeading";
-import { getArtworksByTag } from "@/data/artworks";
+import { queryArtworks } from "@/data/artworks";
+import { artListHref, parseCollectionSort } from "@/lib/collection-sort";
 
 export const metadata: Metadata = {
   title: "ART",
@@ -11,13 +13,14 @@ export const metadata: Metadata = {
 };
 
 interface ArtPageProps {
-  searchParams: Promise<{ tag?: string }>;
+  searchParams: Promise<{ tag?: string; sort?: string }>;
 }
 
 export default async function ArtPage({ searchParams }: ArtPageProps) {
   const params = await searchParams;
   const tag = params.tag ?? null;
-  const filtered = getArtworksByTag(tag);
+  const sort = parseCollectionSort(params.sort);
+  const filtered = queryArtworks(tag, sort);
 
   return (
     <div className="page-enter bg-black-base px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
@@ -37,7 +40,8 @@ export default async function ArtPage({ searchParams }: ArtPageProps) {
           </p>
         </header>
 
-        <ArtTagNav activeTag={tag} />
+        <ArtTagNav activeTag={tag} activeSort={sort} />
+        <CollectionSortNav activeSort={sort} buildHref={(nextSort) => artListHref(tag, nextSort)} />
 
         <div className="mt-14 grid grid-cols-1 gap-12 sm:gap-14 md:grid-cols-2 md:gap-x-10 md:gap-y-16 lg:mt-20 lg:gap-x-14">
           {filtered.map((artwork) => (

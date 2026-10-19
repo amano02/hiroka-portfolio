@@ -7,6 +7,10 @@ export interface Artwork {
   slug: string;
   title: string;
   year?: number | string;
+  /** ISO date YYYY-MM-DD */
+  createdAt: string;
+  /** ISO date YYYY-MM-DD */
+  updatedAt: string;
   mediaType: ArtworkMediaType;
   media: string;
   thumbnail?: string;

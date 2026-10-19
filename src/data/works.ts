@@ -1,4 +1,9 @@
 import type { Work } from "@/types/work";
+import {
+  defaultCollectionSort,
+  parseCollectionSort,
+  sortCollectionItems,
+} from "@/lib/collection-sort";
 
 export const works: Work[] = [
   {
@@ -7,6 +12,8 @@ export const works: Work[] = [
     category: "web",
     subCategory: "Web",
     year: 2026,
+    createdAt: "2026-06-01",
+    updatedAt: "2026-10-01",
     type: "Client Work",
     description: "Human Love AidのWebサイト全面リニューアル。",
     image: "/works/hla-website.jpg",
@@ -22,6 +29,8 @@ export const works: Work[] = [
     title: "Slack × GitHub PR Management App",
     category: "dx",
     subCategory: "App / DX",
+    createdAt: "2025-11-01",
+    updatedAt: "2026-03-15",
     type: "App / DX",
     description: "Slack上でGitHub Pull Requestを管理するアプリ。",
     image: "/works/slack-github-pr.jpg",
@@ -36,6 +45,8 @@ export const works: Work[] = [
     title: "3D Character Works",
     category: "3d",
     subCategory: "3D / Character",
+    createdAt: "2025-08-01",
+    updatedAt: "2026-10-15",
     type: "Ongoing Project",
     description:
       "VRoid Studio などで制作した3Dキャラクターの継続的なコレクション。映像・ゲーム・MV等の制作ベースとして育てています。",
@@ -51,6 +62,8 @@ export const works: Work[] = [
     title: "shiro",
     category: "3d",
     subCategory: "3D / Team Project",
+    createdAt: "2025-10-01",
+    updatedAt: "2026-01-20",
     type: "Team Project",
     description: "学校でのチーム開発による3Dプロジェクト。",
     image: "/works/shiro.jpg",
@@ -63,6 +76,8 @@ export const works: Work[] = [
     title: "AI Partner",
     category: "ai",
     subCategory: "AI / Experiment",
+    createdAt: "2026-01-15",
+    updatedAt: "2026-09-20",
     type: "Experiment",
     description: "人生を成長しながら一緒に楽しむAIパートナー構想。",
     image: "/works/ai-partner.jpg",
@@ -77,7 +92,10 @@ export function getWorkBySlug(slug: string): Work | undefined {
 }
 
 export function getFeaturedWorks(): Work[] {
-  return works.filter((work) => work.featured);
+  return sortCollectionItems(
+    works.filter((work) => work.featured),
+    defaultCollectionSort,
+  );
 }
 
 export function getWorksByCategory(category: string | null | undefined): Work[] {
@@ -85,4 +103,12 @@ export function getWorksByCategory(category: string | null | undefined): Work[] 
     return works;
   }
   return works.filter((work) => work.category === category);
+}
+
+export function queryWorks(
+  category: string | null | undefined,
+  sort: string | null | undefined,
+): Work[] {
+  const filtered = getWorksByCategory(category);
+  return sortCollectionItems(filtered, parseCollectionSort(sort));
 }

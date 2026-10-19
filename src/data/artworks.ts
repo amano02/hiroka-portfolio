@@ -1,10 +1,13 @@
 import type { Artwork } from "@/types/artwork";
+import { parseCollectionSort, sortCollectionItems } from "@/lib/collection-sort";
 import { publicAssetExists } from "@/lib/media";
 
 export const artworks: Artwork[] = [
   {
     slug: "piano-cg",
     title: "Piano",
+    createdAt: "2025-12-10",
+    updatedAt: "2025-12-10",
     mediaType: "image",
     media: "/art/piano-cg.jpg",
     tags: ["cg", "3d", "lighting", "rendering"],
@@ -13,6 +16,8 @@ export const artworks: Artwork[] = [
   {
     slug: "water-cat",
     title: "Water Cat",
+    createdAt: "2026-02-01",
+    updatedAt: "2026-02-01",
     mediaType: "image",
     media: "/art/water-cat.jpg",
     tags: ["cg", "3d", "material-study"],
@@ -21,6 +26,8 @@ export const artworks: Artwork[] = [
   {
     slug: "logo-motion",
     title: "Logo Motion",
+    createdAt: "2026-04-01",
+    updatedAt: "2026-04-15",
     mediaType: "video",
     media: "/art/ロゴモーション.mp4",
     tags: ["motion", "video-editing", "graphic"],
@@ -29,6 +36,8 @@ export const artworks: Artwork[] = [
   {
     slug: "imawanokiwa",
     title: "IMAWANOKIWA",
+    createdAt: "2025-09-01",
+    updatedAt: "2025-09-20",
     mediaType: "video",
     media: "/art/IMAWANOKIWA.mp4",
     tags: ["animation", "illustration", "video-editing"],
@@ -37,6 +46,8 @@ export const artworks: Artwork[] = [
   {
     slug: "hana-ga-ochita-node",
     title: "花が落ちたので",
+    createdAt: "2025-07-01",
+    updatedAt: "2025-08-01",
     mediaType: "video",
     media: "/art/花が落ちたので.mp4",
     tags: ["animation", "illustration", "video-editing"],
@@ -45,6 +56,8 @@ export const artworks: Artwork[] = [
   {
     slug: "koninron",
     title: "婚姻論",
+    createdAt: "2025-06-01",
+    updatedAt: "2025-06-25",
     mediaType: "video",
     media: "/art/婚姻論.mp4",
     tags: ["animation", "illustration", "video-editing"],
@@ -53,6 +66,8 @@ export const artworks: Artwork[] = [
   {
     slug: "loading-visual",
     title: "Loading Visual",
+    createdAt: "2026-05-01",
+    updatedAt: "2026-05-01",
     mediaType: "image",
     media: "/art/loading-visual.jpg",
     tags: ["graphic", "photography", "visual-design"],
@@ -61,6 +76,8 @@ export const artworks: Artwork[] = [
   {
     slug: "illustration-characters",
     title: "Character Illustration",
+    createdAt: "2026-10-01",
+    updatedAt: "2026-10-19",
     mediaType: "image",
     media: "/art/illustration-characters.jpg",
     tags: ["illustration"],
@@ -82,6 +99,14 @@ export function getArtworksByTag(tag: string | null | undefined): Artwork[] {
     return list;
   }
   return list.filter((item) => item.tags.includes(tag));
+}
+
+export function queryArtworks(
+  tag: string | null | undefined,
+  sort: string | null | undefined,
+): Artwork[] {
+  const filtered = getArtworksByTag(tag);
+  return sortCollectionItems(filtered, parseCollectionSort(sort));
 }
 
 export type ArtworkDisplayMedia =

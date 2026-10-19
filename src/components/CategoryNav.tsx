@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { workCategoryFilters } from "@/lib/constants";
+import { type CollectionSort, worksListHref } from "@/lib/collection-sort";
 
 interface CategoryNavProps {
   activeCategory: string | null;
+  activeSort: CollectionSort;
 }
 
-export function CategoryNav({ activeCategory }: CategoryNavProps) {
+export function CategoryNav({ activeCategory, activeSort }: CategoryNavProps) {
   return (
     <nav className="font-ui flex flex-wrap gap-x-6 gap-y-3 text-xs tracking-[0.22em] sm:text-sm">
       {workCategoryFilters.map((item) => {
@@ -13,7 +15,7 @@ export function CategoryNav({ activeCategory }: CategoryNavProps) {
           item.slug === null
             ? !activeCategory || activeCategory === "all"
             : activeCategory === item.slug;
-        const href = item.slug ? `/works?category=${item.slug}` : "/works";
+        const href = worksListHref(item.slug, activeSort);
 
         return (
           <Link

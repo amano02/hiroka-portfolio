@@ -8,6 +8,10 @@ export interface Work {
   category: WorkCategory;
   subCategory: string;
   year?: number;
+  /** ISO date YYYY-MM-DD */
+  createdAt: string;
+  /** ISO date YYYY-MM-DD */
+  updatedAt: string;
   type: string;
   description: string;
   image: string;
